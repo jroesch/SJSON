@@ -32,9 +32,12 @@ class Parser(val tk: Lexer) {
 		case t :: ts => tokens = ts
 	}
 	
-	def parseJSON(): Option[JSON] = pObject() match {
-		case json@Some(_) => json
-		case None         => pArray()
+	def parseJSON(): JSON = pObject() match {
+		case Some(json) => json
+		case None       => pArray() match {
+			case Some(json) => json
+			case None => throw new Exception("parse error")
+		}
 	}
 		
 	def pObject(): Option[JSON] = {
