@@ -1,4 +1,4 @@
-package com.jroesch.JSON
+package com.jroesch
 
 package object JSON {
 /* easy parse function */
